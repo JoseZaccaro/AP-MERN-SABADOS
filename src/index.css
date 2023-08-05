@@ -2,7 +2,9 @@
   font-family: bebas-new;
   src: url("C:/Users/azacc/Desktop/AP MERN SABADO/public/assets/fonts/BebasNeue.otf");
 }
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   margin: 0;
   padding: 0;
