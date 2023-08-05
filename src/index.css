@@ -1,0 +1,12 @@
+@font-face {
+  font-family: bebas-new;
+  src: url("C:/Users/azacc/Desktop/AP MERN SABADO/public/assets/fonts/BebasNeue.otf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
