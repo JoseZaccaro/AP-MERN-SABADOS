@@ -1,12 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
+import Card from '../components/Card';
 
 const Home = () => {
-  const [temporada, setTemporada] = useState('Temporada 1')
+  const [temporada, setTemporada] = useState('S01')
+  const [episodes, setEpisodes] = useState([])
+
   const onHandleChange = (e) => {
     // Two way binding
     setTemporada(e.target.value)
   }
+  console.log(temporada);
+
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/episode?episode=${temporada}`)
+      .then(res => res.json())
+      .then(data => setEpisodes(data.results))
+
+    // document.title = "Home"
+  }, [temporada])
+
 
   return (
     <main>
@@ -15,33 +28,25 @@ const Home = () => {
         <img className='w-8 h-8 mt-4 mr-4' src="https://static.vecteezy.com/system/resources/previews/021/815/794/original/cross-close-icon-free-png.png" alt="x" />
       </div>
       <div>
-        <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+        {/* <Dropdown> */}
+        {/* <Dropdown.Toggle variant="secondary" id="dropdown-basic">
             Temporadas
-          </Dropdown.Toggle>
+          </Dropdown.Toggle> */}
 
-          <Dropdown.Menu as={'select'} onChange={onHandleChange} value={temporada}>
-            <Dropdown.Item as={'option'} value={'Temporada 1'} >Temporada 1</Dropdown.Item>
-            <Dropdown.Item as={'option'} value={'Temporada 2'} >Temporada 2</Dropdown.Item>
-            <Dropdown.Item as={'option'} value={'Temporada 3'} >Temporada 3</Dropdown.Item>
-            <Dropdown.Item as={'option'} value={'Temporada 4'} >Temporada 4</Dropdown.Item>
-            <Dropdown.Item as={'option'} value={'Temporada 5'} >Temporada 5</Dropdown.Item>
-            <Dropdown.Item as={'option'} value={'Temporada 6'} >Temporada 6</Dropdown.Item>
-            <Dropdown.Item as={'option'} value={'Temporada 7'} >Temporada 7</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <select onChange={onHandleChange} value={temporada}>
+          <option value={'S01'} >Temporada 1</option>
+          <option value={'S02'} >Temporada 2</option>
+          <option value={'S03'} >Temporada 3</option>
+          <option value={'S04'} >Temporada 4</option>
+          <option value={'S05'} >Temporada 5</option>
+        </select>
+        {/* </Dropdown> */}
       </div>
-      <div className='w-100 bg-red-300 h-[25vh]'>
-        <div className='w-64 flex h-2/3 bg-[url("https://rickandmortyapi.com/api/character/avatar/1.jpeg")] items-start'>
-          <h1 className='text-4xl text-white'>1</h1>
-        </div>
-        <div className='w-64 flex'>
-          <h2>Capitulo 1</h2>
-          <small> 50 min</small>
-        </div>
-        <div className='w-64 flex h-fit'>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur magnam consequatur eligendi natus voluptatem corrupti voluptatum omnis incidunt quos impedit, vero autem maxime. Libero velit corrupti, praesentium iusto alias iure?</p>
-        </div>
+      <div className='w-100 text-white min-h-[35vh] p-4 flex gap-x-4 overflow-x-scroll'>
+        {
+          episodes.map(episode => <Card data={episode} key={episode.id} />)
+        }
+
       </div>
     </main>
   )

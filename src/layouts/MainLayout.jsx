@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Nav from '../components/Nav';
 import { LINKSHOME, LINKSLOG } from '../utils/enums';
 import LogInDropdown from './../components/LogInDropdown';
+import { Outlet } from 'react-router-dom';
 
 
 const MainLayout = ({ children }) => {
@@ -39,9 +40,10 @@ const MainLayout = ({ children }) => {
             </header>
 
             <div className='bg-[#0D1117] min-h-screen w-100'>
-                {
+                {/* {
                     children
-                }
+                } */}
+                <Outlet />
             </div>
         </div>
     )
