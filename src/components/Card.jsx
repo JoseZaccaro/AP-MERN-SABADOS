@@ -11,7 +11,7 @@ const Card = ({ episodeData }) => {
 
     console.log(pj);
     return (
-        <div className='w-[520px] '>
+        <div className='min-w-[20rem] cursor-pointer'>
             <div className={`w-full mb-2 h-[20vh] bg-cover`} style={{ backgroundImage: `url('${pj.image}')` }}>
                 <div className='w-full h-full bg-[rgba(0,0,0,0.4)] flex items-end'>
                     <h1 className='text-4xl text-white'>{episodeData.id}</h1>
