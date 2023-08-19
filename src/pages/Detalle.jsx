@@ -4,22 +4,25 @@ import Card from './../components/Card';
 
 const Detalle = () => {
     // const [temporada, setTemporada] = useState('S01')
-    const [data, setData] = useState({})
-
+    const [serie, setSerie] = useState({})
+    const [capitulos, setCapitulos] = useState([])
     // const onHandleChange = (e) => {
     //     // Two way binding
     //     setTemporada(e.target.value)
     // }
     // console.log(temporada);
-    const { nombre } = useParams()
+    const { id } = useParams()
     useEffect(() => {
-        fetch(`http://localhost:3000/api/peliculas/` + nombre)
+        fetch(`http://localhost:3000/api/series/` + id)
             .then(res => res.json())
-            .then(data => setData(data.info))
+            .then(data => {
+                setSerie(data.serie)
+                setCapitulos(data.serie.capitulos)
+            })
 
         // document.title = "Home"
     }, [])
-    console.log(data);
+    console.log(serie);
     return (
         <main>
             {/* <div className='flex justify-between'>
@@ -33,7 +36,13 @@ const Detalle = () => {
                 {/* {
                     episodes.map(episode => <Card data={episode} key={episode.id} />)
                 } */}
-                <Card data={data}/>
+                <Card data={serie} />
+
+            </div>
+            <div className='w-100 text-white min-h-[35vh] p-4 flex gap-x-4 overflow-x-scroll'>
+                {
+                    capitulos.map(episode => <Card data={episode} key={episode.id} />)
+                }
 
             </div>
         </main>

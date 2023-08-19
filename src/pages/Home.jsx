@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import Dropdown from 'react-bootstrap/Dropdown';
-import Card from '../components/Card';
+import React, { useEffect, useState } from 'react';
+import CardRM from '../components/CardRM';
 
 const Home = () => {
   const [temporada, setTemporada] = useState('S01')
@@ -10,7 +9,8 @@ const Home = () => {
     // Two way binding
     setTemporada(e.target.value)
   }
-  console.log(temporada);
+  // console.log(temporada);
+
 
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/episode?episode=${temporada}`)
@@ -44,7 +44,7 @@ const Home = () => {
       </div>
       <div className='w-100 text-white min-h-[35vh] p-4 flex gap-x-4 overflow-x-scroll'>
         {
-          episodes.map(episode => <Card data={episode} key={episode.id} />)
+          episodes.map(episode => <CardRM data={episode} key={episode.id} />)
         }
 
       </div>
