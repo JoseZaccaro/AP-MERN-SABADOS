@@ -3,7 +3,7 @@ import CardSerie from '../components/CardSerie'
 
 const Series = () => {
     const [series, setSeries] = useState([])
-
+    console.log(series);
     useEffect(() => {
         fetch('http://localhost:3000/api/series')
             .then(res => res.json())
