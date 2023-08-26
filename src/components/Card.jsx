@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import seriesAction from '../store/actions/seriesAction'
 
 const Card = ({ data }) => {
-
     const [modal, setModal] = useState(false)
     useEffect(() => {
         document.body.style.overflow = modal ? 'hidden' : 'initial'
     }, [modal])
+
+    const handleView = () => {
+        setModal(!modal)
+    }
+
     return (
         <>
-            <div onClick={() => setModal(!modal)}>
+            <div onClick={handleView}>
                 <div className='w-64  h-64 bg-cover  bg-center' style={{ backgroundImage: `url("${data.imagen_portada || data.imagen_detalle}")` }}>
                     <div className='bg-[rgba(0,0,0,0.3)] w-full h-full flex items-end' >
                         <h1 className='text-4xl text-white'>{data.id}</h1>

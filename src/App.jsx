@@ -6,6 +6,10 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Series from './pages/Series'
 import Peliculas from './pages/Peliculas'
 import Detalle from './pages/Detalle'
+import { Provider } from 'react-redux'
+import pepito from './store/store'
+
+
 
 const router = createBrowserRouter([
   {
@@ -35,7 +39,9 @@ const router = createBrowserRouter([
 function App() {
 
   return (
-    <RouterProvider router={router} />
+    <Provider store={pepito}>
+      <RouterProvider router={router} />
+    </Provider>
   )
 }
 
