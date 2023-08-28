@@ -9,7 +9,7 @@ export const seriesReducer = createReducer(initialState,
     (builder) =>
         builder.addCase(ultimaSerieVista, (state, action) => {
             console.log(action)
-            const ultimos = [...state.ultimasSeries]
+            const ultimos = [...state.ultimasSeries].filter(serie => serie.nombre !== action.payload.nombre)
             ultimos.unshift(action.payload)
             return {
                 ultimasSeries: ultimos
