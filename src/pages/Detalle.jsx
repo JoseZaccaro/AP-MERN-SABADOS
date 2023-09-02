@@ -26,7 +26,6 @@ const Detalle = () => {
     }, [serie, temporada])
 
     useEffect(() => {
-
         fetch('http://localhost:3000/api/series/' + name)
             .then(res => res.json())
             .then(info => {
@@ -34,6 +33,7 @@ const Detalle = () => {
                 // setEpisodes(info.data.chapters)
             })
             .catch(err => console.error(err))
+
     }, [])
 
     console.log(episodes);
@@ -68,7 +68,7 @@ const Detalle = () => {
                             <Card key={episode.id} episodeData={episode} />
                         ))
                     }
-                    
+
                 </div>
             </div>
         </div>

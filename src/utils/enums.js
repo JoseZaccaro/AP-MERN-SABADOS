@@ -1,8 +1,8 @@
 export const LINKSHOME = [
     { id: 0, title: "Inicio", href: '/' },
     { id: 1, title: "Series", href: '/series' },
-    { id: 2, title: "Peliculas", href: '/peliculas' },
-    { id: 3, title: "Mi lista", href: '/detalle' },
+    { id: 2, title: "Peliculas", href: '/movies' },
+    { id: 3, title: "Mi lista", href: '/' },
 ]
 
 export const LINKSLOG = [

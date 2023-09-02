@@ -5,7 +5,7 @@ import { FaSearchengin } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import filtroAction from '../store/actions/filtroAction';
 // useSelector useDispatch
-const Series = () => {
+const Movies = () => {
 
     const [generos, setGeneros] = useState([])
     const inputRef = useRef()
@@ -13,15 +13,15 @@ const Series = () => {
 
     const dispatch = useDispatch()
 
-    const { series, allSeries } = useSelector(store => store.filtro)
+    const { movies, allMovies } = useSelector(store => store.filtro)
 
-    console.log(series);
+    console.log(movies);
     useEffect(() => {
-        fetch('http://localhost:3000/api/series')
+        fetch('http://localhost:3000/api/movies')
             .then(res => res.json())
             .then(data => {
-                if (allSeries.length === 0) {
-                    dispatch(filtroAction.obtenerSeries(data.data))
+                if (allMovies.length === 0) {
+                    dispatch(filtroAction.obtenerMovies(data.data))
                 }
                 const generosNoRepetidos = [...new Set(data.data.map(serie => serie.genre))]
                 setGeneros(generosNoRepetidos)
@@ -58,11 +58,11 @@ const Series = () => {
     function crossFilter() {
         const inputValue = handleSearch()
         const checksChecked = handleGenres()
-        const filtered = allSeries.filter(serie => serie.name.toLowerCase().trim().includes(inputValue) &&
+        const filtered = allMovies.filter(serie => serie.name.toLowerCase().trim().includes(inputValue) &&
             (checksChecked.length !== 0 ? checksChecked.includes(serie.genre) : true)
         )
         // setSeries(filtered)
-        dispatch(filtroAction.filtrar(filtered))
+        dispatch(filtroAction.filtrarMovies(filtered))
     }
 
     return (
@@ -97,8 +97,8 @@ const Series = () => {
 
 
                 {
-                    series.map(serie => (
-                        <CardSerie data={{ ...serie, to: '/detalle/' + serie.name.toLowerCase() }} key={serie._id} />
+                    movies.map(movie => (
+                        <CardSerie data={{ ...movie, to: '/movies/detalle/' + movie.name.toLowerCase() }} key={movie._id} />
                     ))
                 }
 
@@ -108,4 +108,4 @@ const Series = () => {
     )
 }
 
-export default Series
+export default Movies

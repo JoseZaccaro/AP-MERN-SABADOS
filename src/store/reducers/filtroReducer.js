@@ -3,7 +3,9 @@ import filtroAction from "../actions/filtroAction";
 
 const initialState = {
     series: [],
-    allSeries: []
+    allSeries: [],
+    movies: [],
+    allMovies: []
 }
 const filtroReducer = createReducer(initialState,
     (builder) => builder
@@ -20,6 +22,21 @@ const filtroReducer = createReducer(initialState,
                 ...state,
                 series: action.payload,
                 allSeries: action.payload
+            }
+        })
+        .addCase(filtroAction.filtrarMovies, (state, action) => {
+
+            return {
+                ...state,
+                movies: action.payload
+            }
+        })
+        .addCase(filtroAction.obtenerMovies, (state, action) => {
+
+            return {
+                ...state,
+                movies: action.payload,
+                allMovies: action.payload
             }
         })
 )

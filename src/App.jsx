@@ -7,6 +7,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Series from './pages/Series'
 import Detalle from './pages/Detalle'
 import Componente404 from './pages/Componente404'
+import Movies from './pages/Movies'
+import DetalleMovie from './pages/DetalleMovie'
 
 const router = createBrowserRouter([
   {
@@ -22,8 +24,16 @@ const router = createBrowserRouter([
         element: <Series />
       },
       {
+        path: '/movies',
+        element: <Movies />
+      },
+      {
         path: '/detalle/:name',
         element: <Detalle />
+      },
+      {
+        path: '/movies/detalle/:name',
+        element: <DetalleMovie />
       },
 
       {
