@@ -8,6 +8,7 @@ import Peliculas from './pages/Peliculas'
 import Detalle from './pages/Detalle'
 import { Provider } from 'react-redux'
 import pepito from './store/store'
+import MiLista from './pages/MiLista'
 
 
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/:seccion/detalle/:id',
         element: <Detalle />
+      },
+      {
+        path: '/list',
+        element: <MiLista />
       },
     ]
   }

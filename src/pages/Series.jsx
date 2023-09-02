@@ -1,43 +1,35 @@
 import React, { useEffect, useRef, useState } from 'react'
 import CardPS from '../components/CardPS'
 import { BsSearchHeart } from "react-icons/bs";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import seriesAction from '../store/actions/seriesAction';
 
 const Series = () => {
-    const [series, setSeries] = useState([])
-    const [seriesAux, setSeriesAux] = useState([])
+
     const inputRef = useRef()
-    const { ultimasSeries } = useSelector((store) => store.series)
-
+    const { ultimasSeries, series } = useSelector((store) => store.series)
+    
+    const dispatch = useDispatch()
     useEffect(() => {
-        fetch('http://localhost:3000/api/series')
-            .then(res => res.json())
-            .then(data => {
-                setSeries(data.series)
-                setSeriesAux(data.series)
-            })
-            .catch(err => console.log(err))
 
+        dispatch(seriesAction.obtenerSeries())
         // document.title = 'Series'
     }, [])
 
+    console.log(ultimasSeries);
+
     function handleSearch(event) {
-        const valor = inputRef.current.value.toLowerCase().trim()
+        const valor = inputRef.current.value
         // console.log(event.key);
+
         if (event?.key === "Enter" || event.type === 'click') {
-
-            const filtro = (serie) => serie.nombre.toLowerCase().trim().startsWith(valor)
-
-            const seriesFiltradas = seriesAux.filter(filtro)
-
-            setSeries(seriesFiltradas)
+            dispatch(seriesAction.filtrar(valor))
         } else if (valor === '') {
-            setSeries(seriesAux)
+            dispatch(seriesAction.filtrar(valor))
         }
         if (event?.key === "Escape") {
             inputRef.current.value = ''
-            setSeries(seriesAux)
-
+            dispatch(seriesAction.filtrar(''))
         }
     }
 

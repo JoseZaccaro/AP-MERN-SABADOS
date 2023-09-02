@@ -12,6 +12,10 @@ const CardPS = ({ data }) => {
         <Link to={isSerie ? '/series/detalle/' + data._id : '/peliculas/detalle/' + data._id}>
             <div className={`w-[15rem] h-[30rem] bg-white bg-cover bg-center cursor-pointer`} style={{ backgroundImage: `url(${data.imagen_portada || data.imagen_detalle})` }}>
                 <img src="./assets/images/M.png" alt="M" className='w-16 h-16' />
+                {
+                    data.faved_date &&
+                    <h2 className='text-white text-xl'>Guardado el: {data?.faved_date}</h2>
+                }
             </div>
         </Link>
     )
