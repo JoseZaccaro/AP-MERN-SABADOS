@@ -58,11 +58,11 @@ const Movies = () => {
     function crossFilter() {
         const inputValue = handleSearch()
         const checksChecked = handleGenres()
-        const filtered = allMovies.filter(serie => serie.name.toLowerCase().trim().includes(inputValue) &&
-            (checksChecked.length !== 0 ? checksChecked.includes(serie.genre) : true)
-        )
+        // const filtered = allMovies.filter(serie => serie.name.toLowerCase().trim().includes(inputValue) &&
+        //     (checksChecked.length !== 0 ? checksChecked.includes(serie.genre) : true)
+        // )
         // setSeries(filtered)
-        dispatch(filtroAction.filtrarMovies(filtered))
+        dispatch(filtroAction.filtrarMovies({ search: inputValue, checks: checksChecked }))
     }
 
     return (

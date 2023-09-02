@@ -17,17 +17,23 @@ const Series = () => {
 
     console.log(series);
     useEffect(() => {
-        fetch('http://localhost:3000/api/series')
-            .then(res => res.json())
-            .then(data => {
-                if (allSeries.length === 0) {
-                    dispatch(filtroAction.obtenerSeries(data.data))
-                }
-                const generosNoRepetidos = [...new Set(data.data.map(serie => serie.genre))]
+        // fetch('http://localhost:3000/api/series')
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (allSeries.length === 0) {
+        //             dispatch(filtroAction.obtenerSeries(data.data))
+        //         }
+        //     })
+        //     .catch(err => console.log(err))
+        dispatch(filtroAction.obtenerSeries())
+            .then(action => {
+                // console.log(action)
+                const data = action.payload
+                const generosNoRepetidos = [...new Set(data.map(serie => serie.genre))]
                 setGeneros(generosNoRepetidos)
             })
-            .catch(err => console.log(err))
     }, [])
+
 
 
     function handleSearch(params) {
@@ -58,11 +64,10 @@ const Series = () => {
     function crossFilter() {
         const inputValue = handleSearch()
         const checksChecked = handleGenres()
-        const filtered = allSeries.filter(serie => serie.name.toLowerCase().trim().includes(inputValue) &&
-            (checksChecked.length !== 0 ? checksChecked.includes(serie.genre) : true)
-        )
         // setSeries(filtered)
-        dispatch(filtroAction.filtrar(filtered))
+        dispatch(filtroAction.filtrar(
+            { search: inputValue, checks: checksChecked }
+        ))
     }
 
     return (

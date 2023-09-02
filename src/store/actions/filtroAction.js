@@ -1,18 +1,25 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 
-const filtrar = createAction('filtrar', (seriesFiltradas) => {
+const filtrar = createAction('filtrar', (infoInputs) => {
 
     return {
-        payload: seriesFiltradas
+        payload: infoInputs
     }
 })
 
-const obtenerSeries = createAction('obtenerSeries', (series) => {
+const obtenerSeries = createAsyncThunk('obtenerSeries', async () => {
+    // Pending 
+    // Fulfilled 
+    // Rejected 
 
-    return {
-        payload: series
-    }
+    const res = await fetch('http://localhost:3000/api/series')
+    const { data } = await res.json()
+    console.log(data);
+
+    return data
 })
+
+
 const filtrarMovies = createAction('filtrarMovies', (moviesFiltradas) => {
 
     return {
