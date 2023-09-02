@@ -54,6 +54,11 @@ const DetalleMovie = () => {
                         </div>
                     </div>
                 </div>
+                <div className={`w-full h-full absolute top-0 left-0 flex justify-center items-center `}>
+                    <a href={movie?.url} target="_blank" rel="noopener noreferrer" className='z-10' draggable={false}>
+                        <img src="https://icon-library.com/images/video-playback-icon/video-playback-icon-12.jpg" alt="play" className='w-[200px] h-[200px]' draggable={false} />
+                    </a>
+                </div>
             </div>
 
             <div className='w-100 min-h-[50vh] flex-1 items-center p-4 text-white flex gap-4 overflow-x-scroll ' >
