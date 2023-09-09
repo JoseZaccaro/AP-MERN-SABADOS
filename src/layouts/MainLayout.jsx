@@ -39,7 +39,7 @@ const MainLayout = ({ children }) => {
                 }
             </header>
 
-            <div className='bg-[#0D1117] min-h-screen w-100'>
+            <div className='bg-[#0D1117] min-h-[90vh] w-100'>
                 {/* {
                     children
                 } */}
