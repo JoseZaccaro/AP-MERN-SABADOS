@@ -1,6 +1,9 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { addFavorite, getFavorites, removeFavorite } from "../actions/favActions";
-const initialState = { favorites: [] }
+import { addFavorite, getFavorites, register, removeFavorite, signin } from "../actions/favActions";
+const initialState = {
+    favorites: [],
+    user: {}
+}
 
 const favReducer = createReducer(initialState,
     (builder) =>
@@ -21,6 +24,19 @@ const favReducer = createReducer(initialState,
                 return {
                     ...state,
                     favorites: action.payload
+                }
+            })
+            // .addCase(register.fulfilled, (state, action) => {
+            //     return {
+            //         ...state,
+            //         user: action.payload
+            //     }
+            // })
+            .addCase(signin.fulfilled, (state, action) => {
+                return {
+                    ...state,
+                    user: action.payload,
+                    favorites: action.payload.favorites
                 }
             })
 )

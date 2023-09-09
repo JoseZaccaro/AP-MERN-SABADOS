@@ -9,6 +9,9 @@ import Detalle from './pages/Detalle'
 import Componente404 from './pages/Componente404'
 import Movies from './pages/Movies'
 import DetalleMovie from './pages/DetalleMovie'
+import Register from './pages/Register'
+import SignIn from './pages/SignIn'
+import MyList from './pages/MyList'
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,18 @@ const router = createBrowserRouter([
       {
         path: '/movies/detalle/:name',
         element: <DetalleMovie />
+      },
+      {
+        path: '/register',
+        element: <Register />
+      },
+      {
+        path: '/signin',
+        element: <SignIn />
+      },
+      {
+        path: '/my',
+        element: <MyList />
       },
 
       {

@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
 
-const addFavorite = createAsyncThunk('add', async (favoriteId) => {
-    const res = await fetch('http://localhost:3000/api/user/addFav/64f35de166f704f17ee5e759',
+const addFavorite = createAsyncThunk('add', async ({ fav, userId }) => {
+    const res = await fetch('http://localhost:3000/api/user/addFav/' + userId,
         {
             method: 'PUT',
             body: JSON.stringify({
-                favorite: favoriteId
+                favorite: fav
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -16,12 +17,12 @@ const addFavorite = createAsyncThunk('add', async (favoriteId) => {
     console.log(data)
     return data.user.favorites
 })
-const removeFavorite = createAsyncThunk('remove', async (favoriteId) => {
-    const res = await fetch('http://localhost:3000/api/user/removeFav/64f35de166f704f17ee5e759',
+const removeFavorite = createAsyncThunk('remove', async ({ fav, userId }) => {
+    const res = await fetch('http://localhost:3000/api/user/removeFav/' + userId,
         {
             method: 'PUT',
             body: JSON.stringify({
-                favorite: favoriteId
+                favorite: fav
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -32,11 +33,26 @@ const removeFavorite = createAsyncThunk('remove', async (favoriteId) => {
     console.log(data)
     return data.user.favorites
 })
-const getFavorites = createAsyncThunk('get', async () => {
-    const res = await fetch('http://localhost:3000/api/user/favs/64f35de166f704f17ee5e759')
+const getFavorites = createAsyncThunk('get', async ({ userId }) => {
+    const res = await fetch('http://localhost:3000/api/user/favs/' + userId)
     const data = await res.json()
     console.log(data)
     return data.favorites
 })
 
-export { addFavorite, removeFavorite, getFavorites }
+const register = createAsyncThunk('register', async (data) => {
+    const res = await axios.post('http://localhost:3000/api/auth/register', data)
+    // const data = await res.json()
+    console.log(res.data);
+    return "up"
+})
+const signin = createAsyncThunk('signin', async (data) => {
+    const res = await axios.post('http://localhost:3000/api/auth/signin', data)
+    // const data = await res.json()
+    console.log(res.data);
+    // console.log(data)
+    return res.data.response
+})
+
+
+export { addFavorite, removeFavorite, getFavorites, register, signin }

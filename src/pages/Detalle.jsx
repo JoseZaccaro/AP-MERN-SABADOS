@@ -11,8 +11,8 @@ const Detalle = () => {
     const navigate = useNavigate()
     const { name } = useParams()
     const dispatch = useDispatch()
-    const { favorites } = useSelector(store => store.favs)
-
+    const { favorites, user } = useSelector(store => store.favs)
+    const { _id } = user
     const onHandleChange = (e) => {
         // Two way binding
         // console.log(e.target)
@@ -37,15 +37,16 @@ const Detalle = () => {
                 // setEpisodes(info.data.chapters)
             })
             .catch(err => console.error(err))
-        dispatch(getFavorites())
+        dispatch(getFavorites({ userId: _id }))
     }, [])
     function handleFav() {
-        console.log('agregar a fav', serie._id)
-        console.log(favorites.includes(serie._id));
-        if (!favorites.includes(serie._id)) {
-            dispatch(addFavorite(serie._id))
+        // console.log('agregar a fav', serie._id)
+        // console.log(favorites.includes(serie._id));
+        const includes = favorites.some(fav => String(fav._id) === String(serie._id))
+        if (!includes) {
+            dispatch(addFavorite({ fav: serie._id, userId: _id }))
         } else {
-            dispatch(removeFavorite(serie._id))
+            dispatch(removeFavorite({ fav: serie._id, userId: _id }))
             // console.log('falso');
         }
     }
@@ -61,7 +62,7 @@ const Detalle = () => {
                     <div className='flex gap-4 items-center p-4'>
                         {/* <img className='w-28' src="/assets/images/M.png" alt="logo" /> */}
                         {
-                            !favorites.includes(serie._id) ? <MdFavoriteBorder size={64} color='red' onClick={handleFav} /> : <MdFavorite size={64} color='red' onClick={handleFav} />
+                            !favorites.some(fav => String(fav._id) === String(serie._id)) ? <MdFavoriteBorder size={64} color='red' onClick={handleFav} /> : <MdFavorite size={64} color='red' onClick={handleFav} />
 
                         }
 
